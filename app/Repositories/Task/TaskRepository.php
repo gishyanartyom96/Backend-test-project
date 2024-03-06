@@ -78,7 +78,7 @@ class TaskRepository implements TaskRepositoryInterface
 
         $query->where('id', $id);
 
-        if ($query->exists() && $query->delete()) {
+        if (!$query->exists() || !$query->delete()) {
             throw new DeletingErrorException();
         }
     }
